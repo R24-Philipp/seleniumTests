@@ -26,8 +26,20 @@ jobs:
         pip install -r requirements.txt
     - name: setup-chromedriver
       uses: nanasess/setup-chromedriver@v1.1.0
+    - name: "Ubuntu Xvfb"
+      if: ${{ matrix.platform == 'ubuntu-latest' }}
+      run: |
+          export DISPLAY=:60.0
+          Xvfb :13 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+          # xauth with complain unless ~/.Xauthority exists
+          touch ~/.Xauthority
+          # To view a listing of the .Xauthority file, enter the following 
+          xauth list
+          # fluxbox 
+          fluxbox &
     - name: Install plugin
-      run: pip install pytest-github-actions-annotate-failures
+      run: | 
+        pip install pytest-github-actions-annotate-failures
     - name: Test with pytest
       run: |
         pytest 
