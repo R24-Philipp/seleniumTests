@@ -1,5 +1,4 @@
 import os
-import time
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -18,7 +17,7 @@ class Testwebpage:
         page_url = driver.current_url
         assert os.getenv('BASE_URL') in page_url
 
-        time.sleep(5)
+
 
     def test_cleanup(self):
         driver.quit()
