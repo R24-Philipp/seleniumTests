@@ -1,8 +1,12 @@
 name: RequestTests
 on:
  workflow_dispatch:
+permissions:
+   contents: read
+env:
+      BASE_URL: ${{ secrets.BASE_URL }} 
 jobs:
-  cron:
+ cron:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
