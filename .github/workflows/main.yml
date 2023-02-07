@@ -26,6 +26,11 @@ jobs:
         pip install -r requirements.txt
     - name: setup-chromedriver
       uses: nanasess/setup-chromedriver@v1.1.0
+    - name: Run Chromedriver
+      run: |
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub &
+        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
     - name: Install plugin
       run: pip install pytest-github-actions-annotate-failures
     - name: Test with pytest
